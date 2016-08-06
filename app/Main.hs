@@ -16,6 +16,7 @@ main = do
   widgetShowAll mainWindow
   mainGUI
 
+-- SetUp Buttons
 setUpButtons :: TableClass self => self -> IO()
 setUpButtons self = do
   mapM_ createButtonforRow (zip (repeat self) [0..8])
@@ -30,6 +31,7 @@ createButton (table,row,col) = do
   on button buttonActivated $ do 
     randomBomb row col
   tableAttachDefaults table button row (row+1) col (col+1)
+
 
 randomBomb :: Int -> Int -> IO ()
 randomBomb row col = do

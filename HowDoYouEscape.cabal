@@ -27,6 +27,7 @@ executable HowDoYouEscape-exe
   build-depends:       base
                      , HowDoYouEscape
                      , gtk3 
+                     , random
   default-language:    Haskell2010
 
 test-suite HowDoYouEscape-test
