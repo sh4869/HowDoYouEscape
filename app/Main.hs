@@ -1,4 +1,5 @@
 import Graphics.UI.Gtk
+import System.Random
 
 main :: IO ()
 main = do
@@ -26,7 +27,18 @@ createButtonforRow (table ,a) = do
 createButton :: (TableClass table) => (table,Int,Int) -> IO()
 createButton (table,row,col) = do
   button <- buttonNew
+  on button buttonActivated $ do 
+    randomBomb row col
   tableAttachDefaults table button row (row+1) col (col+1)
+
+randomBomb :: Int -> Int -> IO ()
+randomBomb row col = do
+   gen0 <- newStdGen
+   let (r1, gen1) = randomR (0,8) gen0
+       (r2, gen2) = randomR (0,8) gen1 
+   if r1 == row || r2 == col
+   then putStrLn "owari"
+   else putStrLn "safe"
 
 setColSpacing :: TableClass self =>  (self,Int,Int) -> IO()
 setColSpacing (table,row,spacing) = do 
